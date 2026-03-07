@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom — Platform Capabilities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: rgb(0, 0, 0);
+            color: rgb(247, 247, 247);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(22, 22, 22, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #f7f7f7;
+            text-decoration: none;
+        }
+
+        .nav-brand span { font-weight: 300; color: rgb(164, 164, 164); }
+
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+
+        .nav-links a {
+            color: rgb(164, 164, 164);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.071em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: #f7f7f7; }
+
+        .page-header {
+            padding: 120px 48px 60px;
+            background: rgb(22, 22, 22);
+        }
+
+        .page-header .section-label {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        .platform-diagram {
+            padding: 40px 48px 80px;
+            display: flex;
+            justify-content: center;
+            background: rgb(22, 22, 22);
+        }
+
+        .platform-diagram svg {
+            max-width: 1000px;
+            width: 100%;
+            height: auto;
+        }
+
+        @keyframes pulse-flow {
+            0% { opacity: 0; transform: translateX(-8px); }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(8px); }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes data-stream {
+            0% { stroke-dashoffset: 20; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes ring-breathe {
+            0%, 100% { r: 32; opacity: 0.15; }
+            50% { r: 36; opacity: 0.25; }
+        }
+
+        .capabilities-container {
+            padding: 60px 48px 120px;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            max-width: 1100px;
+        }
+
+        .capability-card {
+            padding: 32px;
+            border: 1px solid rgba(64, 64, 64, 0.3);
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .capability-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .capability-name {
+            font-family: 'Cabin', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #f7f7f7;
+        }
+
+        .capability-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 48px;
+            background: rgb(22, 22, 22);
+            border-top: 1px solid rgba(64, 64, 64, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .footer-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(136, 136, 136);
+            letter-spacing: 0.05em;
+        }
+
+        footer .footer-links { display: flex; gap: 24px; }
+
+        footer .footer-links a {
+            font-size: 13px;
+            color: rgb(136, 136, 136);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer .footer-links a:hover { color: #f7f7f7; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 24px; }
+            .page-header { padding: 100px 24px 40px; }
+            .page-header h1 { font-size: 28px; }
+            .platform-diagram { padding: 20px 24px 40px; }
+            .capabilities-container { padding: 40px 24px 80px; }
+            .capabilities-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html#challenge">The Challenge</a></li>
+            <li><a href="platform.html" class="active">Platform</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="regimes.html">Regimes</a></li>
+            <li><a href="https://graceblackwell.ai/" target="_blank">Grace Blackwell</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="section-label">The Platform</div>
+        <h1>Purpose-built for deadline-critical regulated workflows.</h1>
+        <p>Axiom acts as the governance and orchestration layer across your regulatory return process — automating data collection, enforcing submission rules, managing approval workflows, and providing a complete audit trail from source data to filed return.</p>
+    </div>
+
+    <div class="platform-diagram">
+        <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Animated flow markers -->
+                <marker id="arr" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                    <path d="M0,0 L6,2.5 L0,5" fill="none" stroke="rgba(100,100,100,0.5)" stroke-width="0.8"/>
+                </marker>
+                <marker id="arr-blue" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                    <path d="M0,0 L6,2.5 L0,5" fill="none" stroke="rgba(59,130,246,0.5)" stroke-width="0.8"/>
+                </marker>
+                <marker id="arr-green" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                    <path d="M0,0 L6,2.5 L0,5" fill="none" stroke="rgba(34,197,94,0.5)" stroke-width="0.8"/>
+                </marker>
+
+                <!-- Glow filter for central orb -->
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- ====================== -->
+            <!-- SOURCE SYSTEMS (left)  -->
+            <!-- ====================== -->
+            <text x="75" y="85" text-anchor="middle" fill="rgba(136,136,136,0.6)" font-size="9" font-family="Lato" letter-spacing="1.2">SOURCE SYSTEMS</text>
+
+            <rect x="20" y="105" width="110" height="32" rx="4" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.35)" stroke-width="0.8"/>
+            <text x="75" y="125" text-anchor="middle" fill="rgba(164,164,164,0.8)" font-size="10" font-family="Lato">Finance ERP</text>
+
+            <rect x="20" y="150" width="110" height="32" rx="4" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.35)" stroke-width="0.8"/>
+            <text x="75" y="170" text-anchor="middle" fill="rgba(164,164,164,0.8)" font-size="10" font-family="Lato">Actuarial Model</text>
+
+            <rect x="20" y="195" width="110" height="32" rx="4" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.35)" stroke-width="0.8"/>
+            <text x="75" y="215" text-anchor="middle" fill="rgba(164,164,164,0.8)" font-size="10" font-family="Lato">Underwriting</text>
+
+            <rect x="20" y="240" width="110" height="32" rx="4" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.35)" stroke-width="0.8"/>
+            <text x="75" y="260" text-anchor="middle" fill="rgba(164,164,164,0.8)" font-size="10" font-family="Lato">Reinsurance</text>
+
+            <!-- Animated flow lines from sources into platform -->
+            <line x1="130" y1="121" x2="185" y2="175" stroke="rgba(64,64,64,0.35)" stroke-width="0.8" stroke-dasharray="4,3" style="animation: data-stream 1.5s linear infinite;"/>
+            <line x1="130" y1="166" x2="185" y2="185" stroke="rgba(64,64,64,0.35)" stroke-width="0.8" stroke-dasharray="4,3" style="animation: data-stream 1.5s linear infinite; animation-delay: 0.3s;"/>
+            <line x1="130" y1="211" x2="185" y2="200" stroke="rgba(64,64,64,0.35)" stroke-width="0.8" stroke-dasharray="4,3" style="animation: data-stream 1.5s linear infinite; animation-delay: 0.6s;"/>
+            <line x1="130" y1="256" x2="185" y2="215" stroke="rgba(64,64,64,0.35)" stroke-width="0.8" stroke-dasharray="4,3" style="animation: data-stream 1.5s linear infinite; animation-delay: 0.9s;"/>
+
+            <!-- ================================ -->
+            <!-- AXIOM PLATFORM (centre)         -->
+            <!-- ================================ -->
+            <!-- Outer governance container -->
+            <rect x="175" y="50" width="620" height="310" rx="12" fill="rgba(59,130,246,0.02)" stroke="rgba(59,130,246,0.15)" stroke-width="1"/>
+
+            <!-- Platform label bar -->
+            <rect x="175" y="50" width="620" height="36" rx="12" fill="rgba(59,130,246,0.06)"/>
+            <rect x="175" y="72" width="620" height="14" fill="rgba(59,130,246,0.06)"/>
+            <text x="485" y="73" text-anchor="middle" fill="rgba(147,197,253,0.9)" font-size="11" font-family="Cabin" font-weight="600" letter-spacing="1.5">AXIOM ORCHESTRATION PLATFORM</text>
+
+            <!-- Governance badge -->
+            <rect x="630" y="58" width="80" height="18" rx="9" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="0.8"/>
+            <text x="670" y="70" text-anchor="middle" fill="rgba(251,191,36,0.8)" font-size="8" font-family="Lato" font-weight="600" letter-spacing="0.5">GOVERNED</text>
+
+            <!-- Audit trail indicator (right edge) -->
+            <rect x="768" y="95" width="20" height="250" rx="3" fill="rgba(245,158,11,0.03)" stroke="rgba(245,158,11,0.12)" stroke-width="0.8" stroke-dasharray="3,3"/>
+            <text x="778" y="225" text-anchor="middle" fill="rgba(245,158,11,0.4)" font-size="7" font-family="Lato" letter-spacing="0.8" transform="rotate(-90, 778, 225)">AUDIT TRAIL</text>
+
+            <!-- ===== Stage 1: COLLECT ===== -->
+            <circle cx="250" cy="170" r="30" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.3)" stroke-width="1"/>
+            <circle cx="250" cy="170" fill="none" stroke="rgba(59,130,246,0.15)" stroke-width="1" style="animation: ring-breathe 4s ease-in-out infinite;">
+                <animate attributeName="r" values="32;36;32" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <text x="250" y="165" text-anchor="middle" fill="rgba(147,197,253,0.9)" font-size="18">&#x2B07;</text>
+            <text x="250" y="183" text-anchor="middle" fill="rgba(147,197,253,0.7)" font-size="7" font-family="Lato" letter-spacing="0.5">PULL</text>
+            <text x="250" y="220" text-anchor="middle" fill="#f7f7f7" font-size="11" font-family="Cabin" font-weight="600">Collect</text>
+            <text x="250" y="236" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">Source data</text>
+            <text x="250" y="249" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">reconciliation</text>
+
+            <!-- Flow arrow 1→2 -->
+            <line x1="285" y1="170" x2="345" y2="170" stroke="rgba(100,100,100,0.3)" stroke-width="0.8" marker-end="url(#arr)"/>
+            <!-- Animated pulse dot -->
+            <circle r="3" fill="rgba(59,130,246,0.8)" filter="url(#glow)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1">
+                    <mpath href="#flow1"/>
+                </animateMotion>
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <path id="flow1" d="M285,170 L345,170" fill="none" stroke="none"/>
+
+            <!-- ===== Stage 2: VALIDATE ===== -->
+            <circle cx="390" cy="170" r="30" fill="rgba(139,92,246,0.08)" stroke="rgba(139,92,246,0.3)" stroke-width="1"/>
+            <circle cx="390" cy="170" fill="none" stroke="rgba(139,92,246,0.15)" stroke-width="1">
+                <animate attributeName="r" values="32;36;32" dur="4s" begin="1s" repeatCount="indefinite"/>
+            </circle>
+            <text x="390" y="165" text-anchor="middle" fill="rgba(196,181,253,0.9)" font-size="18">&#x2713;</text>
+            <text x="390" y="183" text-anchor="middle" fill="rgba(196,181,253,0.7)" font-size="7" font-family="Lato" letter-spacing="0.5">XBRL</text>
+            <text x="390" y="220" text-anchor="middle" fill="#f7f7f7" font-size="11" font-family="Cabin" font-weight="600">Validate</text>
+            <text x="390" y="236" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">Schema &amp; rules</text>
+            <text x="390" y="249" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">deterministic</text>
+
+            <!-- Flow arrow 2→3 -->
+            <line x1="425" y1="170" x2="485" y2="170" stroke="rgba(100,100,100,0.3)" stroke-width="0.8" marker-end="url(#arr)"/>
+            <circle r="3" fill="rgba(139,92,246,0.8)" filter="url(#glow)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.6s" keyPoints="0;1" keyTimes="0;1">
+                    <mpath href="#flow2"/>
+                </animateMotion>
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="2.5s" begin="0.6s" repeatCount="indefinite"/>
+            </circle>
+            <path id="flow2" d="M425,170 L485,170" fill="none" stroke="none"/>
+
+            <!-- ===== Stage 3: APPROVE ===== -->
+            <circle cx="530" cy="170" r="30" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+            <circle cx="530" cy="170" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="1">
+                <animate attributeName="r" values="32;36;32" dur="4s" begin="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="530" y="165" text-anchor="middle" fill="rgba(251,191,36,0.9)" font-size="18">&#x1F6C8;</text>
+            <text x="530" y="183" text-anchor="middle" fill="rgba(251,191,36,0.7)" font-size="7" font-family="Lato" letter-spacing="0.5">HITL</text>
+            <text x="530" y="220" text-anchor="middle" fill="#f7f7f7" font-size="11" font-family="Cabin" font-weight="600">Approve</text>
+            <text x="530" y="236" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">Human sign-off</text>
+            <text x="530" y="249" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">board authority</text>
+
+            <!-- Flow arrow 3→4 -->
+            <line x1="565" y1="170" x2="625" y2="170" stroke="rgba(100,100,100,0.3)" stroke-width="0.8" marker-end="url(#arr)"/>
+            <circle r="3" fill="rgba(245,158,11,0.8)" filter="url(#glow)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.2s" keyPoints="0;1" keyTimes="0;1">
+                    <mpath href="#flow3"/>
+                </animateMotion>
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.8;1" dur="2.5s" begin="1.2s" repeatCount="indefinite"/>
+            </circle>
+            <path id="flow3" d="M565,170 L625,170" fill="none" stroke="none"/>
+
+            <!-- ===== Stage 4: SUBMIT ===== -->
+            <circle cx="670" cy="170" r="30" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+            <circle cx="670" cy="170" fill="none" stroke="rgba(34,197,94,0.15)" stroke-width="1">
+                <animate attributeName="r" values="32;36;32" dur="4s" begin="3s" repeatCount="indefinite"/>
+            </circle>
+            <text x="670" y="165" text-anchor="middle" fill="rgba(134,239,172,0.9)" font-size="18">&#x2197;</text>
+            <text x="670" y="183" text-anchor="middle" fill="rgba(134,239,172,0.7)" font-size="7" font-family="Lato" letter-spacing="0.5">FILE</text>
+            <text x="670" y="220" text-anchor="middle" fill="#f7f7f7" font-size="11" font-family="Cabin" font-weight="600">Submit</text>
+            <text x="670" y="236" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">Regulatory filing</text>
+            <text x="670" y="249" text-anchor="middle" fill="rgba(164,164,164,0.6)" font-size="9" font-family="Lato">confirmation</text>
+
+            <!-- ===== Bottom bar: AI + Deterministic ===== -->
+            <rect x="200" y="280" width="250" height="28" rx="4" fill="rgba(139,92,246,0.05)" stroke="rgba(139,92,246,0.2)" stroke-width="0.8"/>
+            <text x="325" y="298" text-anchor="middle" fill="rgba(196,181,253,0.7)" font-size="9" font-family="Lato" letter-spacing="0.5">Claude AI — Orchestration &amp; Intelligence</text>
+
+            <rect x="470" y="280" width="250" height="28" rx="4" fill="rgba(16,185,129,0.05)" stroke="rgba(16,185,129,0.2)" stroke-width="0.8"/>
+            <text x="595" y="298" text-anchor="middle" fill="rgba(110,231,183,0.7)" font-size="9" font-family="Lato" letter-spacing="0.5">Deterministic Validation &amp; Certification</text>
+
+            <!-- Enterprise Memory bar -->
+            <rect x="200" y="318" width="520" height="24" rx="4" fill="rgba(59,130,246,0.03)" stroke="rgba(59,130,246,0.12)" stroke-width="0.8"/>
+            <text x="460" y="334" text-anchor="middle" fill="rgba(147,197,253,0.5)" font-size="8" font-family="Lato" letter-spacing="0.8">ENTERPRISE MEMORY — PRIOR RETURNS, METHODOLOGY, ASSUMPTIONS</text>
+
+            <!-- ====================== -->
+            <!-- REGULATORS (right)     -->
+            <!-- ====================== -->
+            <!-- Flow lines out to regulators -->
+            <line x1="795" y1="145" x2="860" y2="120" stroke="rgba(34,197,94,0.3)" stroke-width="0.8" stroke-dasharray="4,3" marker-end="url(#arr-green)" style="animation: data-stream 1.5s linear infinite;"/>
+            <line x1="795" y1="170" x2="860" y2="165" stroke="rgba(34,197,94,0.3)" stroke-width="0.8" stroke-dasharray="4,3" marker-end="url(#arr-green)" style="animation: data-stream 1.5s linear infinite; animation-delay: 0.4s;"/>
+            <line x1="795" y1="195" x2="860" y2="210" stroke="rgba(34,197,94,0.3)" stroke-width="0.8" stroke-dasharray="4,3" marker-end="url(#arr-green)" style="animation: data-stream 1.5s linear infinite; animation-delay: 0.8s;"/>
+            <line x1="795" y1="220" x2="860" y2="255" stroke="rgba(34,197,94,0.3)" stroke-width="0.8" stroke-dasharray="4,3" marker-end="url(#arr-green)" style="animation: data-stream 1.5s linear infinite; animation-delay: 1.2s;"/>
+
+            <text x="925" y="85" text-anchor="middle" fill="rgba(136,136,136,0.6)" font-size="9" font-family="Lato" letter-spacing="1.2">REGULATORS</text>
+
+            <rect x="870" y="105" width="110" height="32" rx="4" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.25)" stroke-width="0.8"/>
+            <text x="925" y="125" text-anchor="middle" fill="rgba(134,239,172,0.8)" font-size="10" font-family="Cabin" font-weight="600">PRA</text>
+
+            <rect x="870" y="150" width="110" height="32" rx="4" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.25)" stroke-width="0.8"/>
+            <text x="925" y="170" text-anchor="middle" fill="rgba(134,239,172,0.8)" font-size="10" font-family="Cabin" font-weight="600">Lloyd's</text>
+
+            <rect x="870" y="195" width="110" height="32" rx="4" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.25)" stroke-width="0.8"/>
+            <text x="925" y="215" text-anchor="middle" fill="rgba(134,239,172,0.8)" font-size="10" font-family="Cabin" font-weight="600">FCA</text>
+
+            <rect x="870" y="240" width="110" height="32" rx="4" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.25)" stroke-width="0.8"/>
+            <text x="925" y="260" text-anchor="middle" fill="rgba(134,239,172,0.8)" font-size="10" font-family="Cabin" font-weight="600">EIOPA</text>
+
+            <!-- ====================== -->
+            <!-- LEGEND (bottom)        -->
+            <!-- ====================== -->
+            <rect x="200" y="378" width="600" height="32" rx="4" fill="rgba(22,22,22,0.5)" stroke="rgba(64,64,64,0.2)" stroke-width="0.8"/>
+
+            <circle cx="235" cy="394" r="6" fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.4)" stroke-width="0.8"/>
+            <text x="248" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">AI Agent</text>
+
+            <circle cx="325" cy="394" r="6" fill="rgba(139,92,246,0.15)" stroke="rgba(139,92,246,0.4)" stroke-width="0.8"/>
+            <text x="338" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Deterministic</text>
+
+            <circle cx="430" cy="394" r="6" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="0.8"/>
+            <text x="443" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Human Gate</text>
+
+            <circle cx="530" cy="394" r="6" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.4)" stroke-width="0.8"/>
+            <text x="543" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Submission</text>
+
+            <line x1="620" y1="394" x2="640" y2="394" stroke="rgba(100,100,100,0.4)" stroke-width="0.8" stroke-dasharray="3,3"/>
+            <text x="648" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Data flow</text>
+
+            <rect x="710" y="387" width="30" height="14" rx="7" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.2)" stroke-width="0.6"/>
+            <text x="748" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Audit</text>
+        </svg>
+    </div>
+
+    <div class="capabilities-container">
+        <div class="capabilities-grid">
+            <div class="capability-card">
+                <div class="capability-name">Policy Engine</div>
+                <div class="capability-desc">Encodes all submission rules, deadline calendars, regulatory templates, and territory-specific requirements as deterministic policy. The system knows what is due, when, in what format, and from which source.</div>
+            </div>
+            <div class="capability-card">
+                <div class="capability-name">Workflow Auditability</div>
+                <div class="capability-desc">Every data pull, transformation, validation check, exception flag, and sign-off is logged with full timestamp and user attribution. The complete evidence chain is available on demand.</div>
+            </div>
+            <div class="capability-card">
+                <div class="capability-name">Agent Orchestration</div>
+                <div class="capability-desc">AI agents collect data from source systems, run validation against regulatory schemas, flag exceptions for human review, and prepare draft returns. Teams review exceptions — not build from scratch.</div>
+            </div>
+            <div class="capability-card">
+                <div class="capability-name">Human-in-the-Loop</div>
+                <div class="capability-desc">Board-level sign-off gates are built into every workflow. No return submits without required approvals. Records are timestamped, attributed, and retained for Lloyd's director sign-off requirements.</div>
+            </div>
+            <div class="capability-card">
+                <div class="capability-name">Enterprise Memory</div>
+                <div class="capability-desc">Prior period returns, methodology decisions, and assumption sets are retained in context — enabling year-on-year consistency checks and providing the continuity evidence regulators expect.</div>
+            </div>
+            <div class="capability-card">
+                <div class="capability-name">Regulatory Change Absorption</div>
+                <div class="capability-desc">As the PRA and Lloyd's publish updated requirements, Axiom's policy layer is updated centrally — not firm by firm. Template versions, taxonomy changes, and deadline shifts propagate automatically.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">AXIOM by Grace Blackwell</div>
+        <div class="footer-links">
+            <a href="index.html">Overview</a>
+            <a href="https://graceblackwell.ai/" target="_blank">graceblackwell.ai</a>
+        </div>
+    </footer>
+
+</body>
+</html>

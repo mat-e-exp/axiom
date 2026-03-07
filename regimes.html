@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom — Regime Coverage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: rgb(0, 0, 0);
+            color: rgb(247, 247, 247);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(22, 22, 22, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #f7f7f7;
+            text-decoration: none;
+        }
+
+        .nav-brand span { font-weight: 300; color: rgb(164, 164, 164); }
+
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+
+        .nav-links a {
+            color: rgb(164, 164, 164);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.071em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: #f7f7f7; }
+
+        .page-header {
+            padding: 120px 48px 60px;
+            background: rgb(22, 22, 22);
+        }
+
+        .page-header .section-label {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        .regimes-container {
+            padding: 60px 48px 120px;
+        }
+
+        .regime-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 1000px;
+        }
+
+        .regime-card {
+            padding: 32px;
+            border: 1px solid rgba(64, 64, 64, 0.3);
+            border-radius: 8px;
+        }
+
+        .regime-badge {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 8px;
+        }
+
+        .regime-name {
+            font-family: 'Cabin', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .regime-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 48px;
+            background: rgb(22, 22, 22);
+            border-top: 1px solid rgba(64, 64, 64, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .footer-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(136, 136, 136);
+            letter-spacing: 0.05em;
+        }
+
+        footer .footer-links { display: flex; gap: 24px; }
+
+        footer .footer-links a {
+            font-size: 13px;
+            color: rgb(136, 136, 136);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer .footer-links a:hover { color: #f7f7f7; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 24px; }
+            .page-header { padding: 100px 24px 40px; }
+            .page-header h1 { font-size: 28px; }
+            .regimes-container { padding: 40px 24px 80px; }
+            .regime-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html#challenge">The Challenge</a></li>
+            <li><a href="platform.html">Platform</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="regimes.html" class="active">Regimes</a></li>
+            <li><a href="https://graceblackwell.ai/" target="_blank">Grace Blackwell</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="section-label">Regime Coverage</div>
+        <h1>What Axiom covers across the insurance regulatory landscape.</h1>
+        <p>Comprehensive support for UK and EU insurance regulatory reporting obligations, from Solvency UK to Lloyd's market returns.</p>
+    </div>
+
+    <div class="regimes-container">
+        <div class="regime-grid">
+            <div class="regime-card">
+                <div class="regime-badge">PRA / Bank of England</div>
+                <div class="regime-name">Solvency UK</div>
+                <div class="regime-desc">Quarterly and annual Pillar III returns, SCR calculations, ORSA, SFCR, and technical provisions. Handles Solvency UK XBRL taxonomy requirements and tracks PRA deadline changes as published.</div>
+            </div>
+            <div class="regime-card">
+                <div class="regime-badge">Managing Agents &amp; Syndicates</div>
+                <div class="regime-name">Lloyd's Market</div>
+                <div class="regime-desc">QF1 quarterly financial returns, DyGIST returns, overseas trust fund adjustments, LCR/SCR capital submissions, syndicate annual accounts. Manages the Lloyd's business timetable, automates MD5 checksum compliance, and enforces director sign-off.</div>
+            </div>
+            <div class="regime-card">
+                <div class="regime-badge">Consumer &amp; Wholesale</div>
+                <div class="regime-name">FCA Conduct</div>
+                <div class="regime-desc">RegData submissions, complaints reporting, Consumer Duty attestations, and product governance returns. Maintains the data lineage and sign-off records that FCA supervisors expect in a review.</div>
+            </div>
+            <div class="regime-card">
+                <div class="regime-badge">Dual-Regime Firms</div>
+                <div class="regime-name">EIOPA / EU Solvency II</div>
+                <div class="regime-desc">For firms under both Solvency UK and EU Solvency II, manages parallel reporting obligations — tracking the EU's January 2027 implementation deadline and maintaining regime-specific audit trails without duplicating effort.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">AXIOM by Grace Blackwell</div>
+        <div class="footer-links">
+            <a href="index.html">Overview</a>
+            <a href="https://graceblackwell.ai/" target="_blank">graceblackwell.ai</a>
+        </div>
+    </footer>
+
+</body>
+</html>
