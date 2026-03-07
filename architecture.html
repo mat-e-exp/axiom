@@ -125,6 +125,50 @@
 
         footer .footer-links a:hover { color: #f7f7f7; }
 
+        .mcp-section {
+            padding: 80px 48px;
+            background: rgb(0, 0, 0);
+            border-top: 1px solid rgba(64, 64, 64, 0.3);
+        }
+
+        .mcp-section .section-label {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 16px;
+        }
+
+        .mcp-section h2 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            max-width: 750px;
+        }
+
+        .mcp-section .lead {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            max-width: 800px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        .mcp-diagram-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mcp-diagram-container svg {
+            max-width: 1000px;
+            width: 100%;
+            height: auto;
+        }
+
         .governance-section {
             padding: 80px 48px;
             background: rgb(22, 22, 22);
@@ -491,6 +535,158 @@
             <text x="887" y="993" fill="rgba(164,164,164,0.7)" font-size="9" font-family="Lato">Audit capture</text>
 
         </svg>
+    </div>
+
+    <div class="mcp-section">
+        <div class="section-label">Integration Pattern</div>
+        <h2>MCP servers bridge the gap between legacy systems and AI agents.</h2>
+        <p class="lead">Most insurance firms don't have clean APIs. Data lives in actuarial model exports, legacy databases, SFTP drops, and spreadsheets. MCP (Model Context Protocol) servers act as the adapter layer — each one handles the messy integration and exposes a clean, typed tool interface to the AI agent. The agent calls a function. The MCP server does the plumbing.</p>
+
+        <div class="mcp-diagram-container">
+            <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="m-right" markerWidth="6" markerHeight="8" refX="6" refY="4" orient="auto">
+                        <path d="M0,0 L6,4 L0,8" fill="none" stroke="rgba(16,185,129,0.5)" stroke-width="1"/>
+                    </marker>
+                    <marker id="m-right-dim" markerWidth="6" markerHeight="8" refX="6" refY="4" orient="auto">
+                        <path d="M0,0 L6,4 L0,8" fill="none" stroke="rgba(100,100,100,0.4)" stroke-width="1"/>
+                    </marker>
+                </defs>
+
+                <!-- =============================== -->
+                <!-- LEFT: SOURCE SYSTEMS            -->
+                <!-- =============================== -->
+                <text x="115" y="30" text-anchor="middle" fill="rgba(136,136,136,0.7)" font-size="10" font-family="Lato" letter-spacing="1.5">SOURCE SYSTEMS</text>
+                <text x="115" y="46" text-anchor="middle" fill="rgba(100,100,100,0.5)" font-size="8" font-family="Lato">No APIs. Legacy formats.</text>
+
+                <!-- Source 1: Actuarial -->
+                <rect x="20" y="70" width="190" height="62" rx="6" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.4)" stroke-width="1"/>
+                <text x="115" y="91" text-anchor="middle" fill="rgba(164,164,164,0.9)" font-size="11" font-family="Cabin" font-weight="600">Actuarial Models</text>
+                <text x="115" y="107" text-anchor="middle" fill="rgba(100,100,100,0.7)" font-size="9" font-family="Lato">ResQ, Igloo, Tyche</text>
+                <text x="115" y="122" text-anchor="middle" fill="rgba(245,158,11,0.5)" font-size="8" font-family="Lato" font-style="italic">Scheduled CSV/Excel exports</text>
+
+                <!-- Source 2: Finance -->
+                <rect x="20" y="148" width="190" height="62" rx="6" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.4)" stroke-width="1"/>
+                <text x="115" y="169" text-anchor="middle" fill="rgba(164,164,164,0.9)" font-size="11" font-family="Cabin" font-weight="600">Finance / ERP</text>
+                <text x="115" y="185" text-anchor="middle" fill="rgba(100,100,100,0.7)" font-size="9" font-family="Lato">SAP, Oracle, Sage</text>
+                <text x="115" y="200" text-anchor="middle" fill="rgba(245,158,11,0.5)" font-size="8" font-family="Lato" font-style="italic">Legacy database / ODBC</text>
+
+                <!-- Source 3: Underwriting -->
+                <rect x="20" y="226" width="190" height="62" rx="6" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.4)" stroke-width="1"/>
+                <text x="115" y="247" text-anchor="middle" fill="rgba(164,164,164,0.9)" font-size="11" font-family="Cabin" font-weight="600">Underwriting Platform</text>
+                <text x="115" y="263" text-anchor="middle" fill="rgba(100,100,100,0.7)" font-size="9" font-family="Lato">Proprietary systems</text>
+                <text x="115" y="278" text-anchor="middle" fill="rgba(245,158,11,0.5)" font-size="8" font-family="Lato" font-style="italic">SFTP batch extracts</text>
+
+                <!-- Source 4: Reinsurance -->
+                <rect x="20" y="304" width="190" height="62" rx="6" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.4)" stroke-width="1"/>
+                <text x="115" y="325" text-anchor="middle" fill="rgba(164,164,164,0.9)" font-size="11" font-family="Cabin" font-weight="600">Reinsurance</text>
+                <text x="115" y="341" text-anchor="middle" fill="rgba(100,100,100,0.7)" font-size="9" font-family="Lato">Bordereaux, treaties</text>
+                <text x="115" y="356" text-anchor="middle" fill="rgba(245,158,11,0.5)" font-size="8" font-family="Lato" font-style="italic">Email / SharePoint drops</text>
+
+                <!-- Source 5: Spreadsheets -->
+                <rect x="20" y="382" width="190" height="62" rx="6" fill="rgba(22,22,22,0.8)" stroke="rgba(64,64,64,0.4)" stroke-width="1"/>
+                <text x="115" y="403" text-anchor="middle" fill="rgba(164,164,164,0.9)" font-size="11" font-family="Cabin" font-weight="600">Manual Processes</text>
+                <text x="115" y="419" text-anchor="middle" fill="rgba(100,100,100,0.7)" font-size="9" font-family="Lato">Excel, manual adjustments</text>
+                <text x="115" y="434" text-anchor="middle" fill="rgba(245,158,11,0.5)" font-size="8" font-family="Lato" font-style="italic">Watch folder / file upload</text>
+
+                <!-- =============================== -->
+                <!-- CONNECTING LINES (left → MCP)   -->
+                <!-- =============================== -->
+                <line x1="210" y1="101" x2="310" y2="101" stroke="rgba(100,100,100,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#m-right-dim)"/>
+                <line x1="210" y1="179" x2="310" y2="179" stroke="rgba(100,100,100,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#m-right-dim)"/>
+                <line x1="210" y1="257" x2="310" y2="257" stroke="rgba(100,100,100,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#m-right-dim)"/>
+                <line x1="210" y1="335" x2="310" y2="335" stroke="rgba(100,100,100,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#m-right-dim)"/>
+                <line x1="210" y1="413" x2="310" y2="413" stroke="rgba(100,100,100,0.3)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#m-right-dim)"/>
+
+                <!-- Integration method labels on lines -->
+                <text x="260" y="93" text-anchor="middle" fill="rgba(100,100,100,0.45)" font-size="7" font-family="Lato">FILE WATCH</text>
+                <text x="260" y="171" text-anchor="middle" fill="rgba(100,100,100,0.45)" font-size="7" font-family="Lato">ODBC / SQL</text>
+                <text x="260" y="249" text-anchor="middle" fill="rgba(100,100,100,0.45)" font-size="7" font-family="Lato">SFTP POLL</text>
+                <text x="260" y="327" text-anchor="middle" fill="rgba(100,100,100,0.45)" font-size="7" font-family="Lato">INBOX / SDK</text>
+                <text x="260" y="405" text-anchor="middle" fill="rgba(100,100,100,0.45)" font-size="7" font-family="Lato">FILE UPLOAD</text>
+
+                <!-- =============================== -->
+                <!-- CENTRE: MCP ADAPTER SERVERS     -->
+                <!-- =============================== -->
+                <rect x="300" y="55" width="280" height="410" rx="10" fill="rgba(16,185,129,0.03)" stroke="rgba(16,185,129,0.2)" stroke-width="1.5"/>
+                <text x="440" y="30" text-anchor="middle" fill="rgba(16,185,129,0.7)" font-size="10" font-family="Lato" letter-spacing="1.5">MCP ADAPTER LAYER</text>
+                <text x="440" y="46" text-anchor="middle" fill="rgba(16,185,129,0.45)" font-size="8" font-family="Lato">Deterministic code. No AI in this layer.</text>
+
+                <!-- MCP Server 1 -->
+                <rect x="318" y="75" width="244" height="52" rx="5" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+                <text x="350" y="97" fill="rgba(110,231,183,0.9)" font-size="10" font-family="Cabin" font-weight="600">MCP: Actuarial Connector</text>
+                <text x="350" y="115" fill="rgba(164,164,164,0.55)" font-size="8" font-family="Lato">Parses exports, validates row counts, checksums on ingest</text>
+
+                <!-- MCP Server 2 -->
+                <rect x="318" y="153" width="244" height="52" rx="5" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+                <text x="350" y="175" fill="rgba(110,231,183,0.9)" font-size="10" font-family="Cabin" font-weight="600">MCP: Finance Connector</text>
+                <text x="350" y="193" fill="rgba(164,164,164,0.55)" font-size="8" font-family="Lato">SQL queries, data mapping, period reconciliation</text>
+
+                <!-- MCP Server 3 -->
+                <rect x="318" y="231" width="244" height="52" rx="5" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+                <text x="350" y="253" fill="rgba(110,231,183,0.9)" font-size="10" font-family="Cabin" font-weight="600">MCP: Underwriting Connector</text>
+                <text x="350" y="271" fill="rgba(164,164,164,0.55)" font-size="8" font-family="Lato">SFTP polling, schema validation, deduplication</text>
+
+                <!-- MCP Server 4 -->
+                <rect x="318" y="309" width="244" height="52" rx="5" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+                <text x="350" y="331" fill="rgba(110,231,183,0.9)" font-size="10" font-family="Cabin" font-weight="600">MCP: Reinsurance Connector</text>
+                <text x="350" y="349" fill="rgba(164,164,164,0.55)" font-size="8" font-family="Lato">Inbox monitor, attachment parser, bordereaux mapping</text>
+
+                <!-- MCP Server 5 -->
+                <rect x="318" y="387" width="244" height="52" rx="5" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+                <text x="350" y="409" fill="rgba(110,231,183,0.9)" font-size="10" font-family="Cabin" font-weight="600">MCP: File Ingestion</text>
+                <text x="350" y="427" fill="rgba(164,164,164,0.55)" font-size="8" font-family="Lato">Watch folder, Excel parser, version control</text>
+
+                <!-- =============================== -->
+                <!-- CONNECTING LINES (MCP → Agent)  -->
+                <!-- =============================== -->
+                <!-- All converge to single clean interface -->
+                <line x1="562" y1="101" x2="650" y2="220" stroke="rgba(16,185,129,0.3)" stroke-width="1" marker-end="url(#m-right)"/>
+                <line x1="562" y1="179" x2="650" y2="225" stroke="rgba(16,185,129,0.3)" stroke-width="1" marker-end="url(#m-right)"/>
+                <line x1="562" y1="257" x2="650" y2="240" stroke="rgba(16,185,129,0.3)" stroke-width="1" marker-end="url(#m-right)"/>
+                <line x1="562" y1="335" x2="650" y2="255" stroke="rgba(16,185,129,0.3)" stroke-width="1" marker-end="url(#m-right)"/>
+                <line x1="562" y1="413" x2="650" y2="265" stroke="rgba(16,185,129,0.3)" stroke-width="1" marker-end="url(#m-right)"/>
+
+                <!-- Convergence label -->
+                <text x="615" y="170" text-anchor="middle" fill="rgba(16,185,129,0.45)" font-size="7" font-family="Lato" letter-spacing="0.5">TYPED</text>
+                <text x="615" y="180" text-anchor="middle" fill="rgba(16,185,129,0.45)" font-size="7" font-family="Lato" letter-spacing="0.5">tool_use</text>
+
+                <!-- =============================== -->
+                <!-- RIGHT: AI AGENT INTERFACE       -->
+                <!-- =============================== -->
+                <rect x="650" y="130" width="330" height="260" rx="10" fill="rgba(139,92,246,0.03)" stroke="rgba(139,92,246,0.2)" stroke-width="1.5"/>
+                <text x="815" y="155" text-anchor="middle" fill="rgba(139,92,246,0.7)" font-size="10" font-family="Lato" letter-spacing="1.5">WHAT THE AI AGENT SEES</text>
+                <text x="815" y="172" text-anchor="middle" fill="rgba(196,181,253,0.5)" font-size="8" font-family="Lato">Clean, typed function calls. No integration complexity.</text>
+
+                <!-- Tool call examples -->
+                <rect x="672" y="192" width="286" height="34" rx="4" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)" stroke-width="1"/>
+                <text x="682" y="213" fill="rgba(196,181,253,0.85)" font-size="10" font-family="monospace">get_technical_provisions(q="Q4")</text>
+
+                <rect x="672" y="236" width="286" height="34" rx="4" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)" stroke-width="1"/>
+                <text x="682" y="257" fill="rgba(196,181,253,0.85)" font-size="10" font-family="monospace">get_trial_balance(period="2025")</text>
+
+                <rect x="672" y="280" width="286" height="34" rx="4" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)" stroke-width="1"/>
+                <text x="682" y="301" fill="rgba(196,181,253,0.85)" font-size="10" font-family="monospace">get_premium_bordereaux(syndicate=1234)</text>
+
+                <rect x="672" y="324" width="286" height="34" rx="4" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)" stroke-width="1"/>
+                <text x="682" y="345" fill="rgba(196,181,253,0.85)" font-size="10" font-family="monospace">get_treaty_cashflows(year=2025)</text>
+
+                <!-- =============================== -->
+                <!-- BOTTOM: Key principles          -->
+                <!-- =============================== -->
+                <rect x="50" y="478" width="200" height="28" rx="4" fill="rgba(245,158,11,0.06)" stroke="rgba(245,158,11,0.2)" stroke-width="0.8"/>
+                <text x="150" y="496" text-anchor="middle" fill="rgba(251,191,36,0.7)" font-size="8" font-family="Lato" letter-spacing="0.5">Every ingest logged with hash + timestamp</text>
+
+                <rect x="270" y="478" width="200" height="28" rx="4" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" stroke-width="0.8"/>
+                <text x="370" y="496" text-anchor="middle" fill="rgba(110,231,183,0.7)" font-size="8" font-family="Lato" letter-spacing="0.5">Validation at boundary, not in AI</text>
+
+                <rect x="490" y="478" width="220" height="28" rx="4" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)" stroke-width="0.8"/>
+                <text x="600" y="496" text-anchor="middle" fill="rgba(196,181,253,0.7)" font-size="8" font-family="Lato" letter-spacing="0.5">Agent never touches raw integration</text>
+
+                <rect x="730" y="478" width="220" height="28" rx="4" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.2)" stroke-width="0.8"/>
+                <text x="840" y="496" text-anchor="middle" fill="rgba(248,113,113,0.7)" font-size="8" font-family="Lato" letter-spacing="0.5">Missing / malformed data = structured error</text>
+            </svg>
+        </div>
     </div>
 
     <div class="governance-section">
