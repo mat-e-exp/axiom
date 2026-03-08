@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom — Market Research</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: rgb(0, 0, 0);
+            color: rgb(247, 247, 247);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(22, 22, 22, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #f7f7f7;
+            text-decoration: none;
+        }
+
+        .nav-brand span { font-weight: 300; color: rgb(164, 164, 164); }
+
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+
+        .nav-links a {
+            color: rgb(164, 164, 164);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.071em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: #f7f7f7; }
+
+        .page-header {
+            padding: 120px 48px 60px;
+            background: rgb(22, 22, 22);
+        }
+
+        .page-header .section-label {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        .content-container {
+            padding: 60px 48px 120px;
+            max-width: 1100px;
+        }
+
+        .section-title {
+            font-family: 'Cabin', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .claims-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 64px;
+        }
+
+        .claims-table th {
+            font-family: 'Cabin', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+        }
+
+        .claims-table td {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(200, 200, 200);
+            padding: 16px;
+            border-bottom: 1px solid rgba(64, 64, 64, 0.2);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .claims-table tr:hover td {
+            background: rgba(59, 130, 246, 0.03);
+        }
+
+        .verdict {
+            font-family: 'Cabin', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 10px;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .verdict-verified {
+            color: rgba(134, 239, 172, 0.9);
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .verdict-partial {
+            color: rgba(251, 191, 36, 0.9);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .verdict-false {
+            color: rgba(248, 113, 113, 0.9);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .verdict-unverified {
+            color: rgba(164, 164, 164, 0.9);
+            background: rgba(100, 100, 100, 0.1);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: rgba(147, 197, 253, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .source-link:hover { color: rgba(147, 197, 253, 1); }
+
+        .competitors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .competitor-card {
+            padding: 32px;
+            border: 1px solid rgba(64, 64, 64, 0.3);
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .competitor-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .competitor-name {
+            font-family: 'Cabin', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .competitor-name a {
+            color: #f7f7f7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .competitor-name a:hover { color: rgba(147, 197, 253, 1); }
+
+        .competitor-position {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 12px;
+        }
+
+        .competitor-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .competitor-link {
+            font-size: 13px;
+            color: rgba(147, 197, 253, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .competitor-link:hover { color: rgba(147, 197, 253, 1); }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(64, 64, 64, 0.3);
+            margin: 64px 0;
+        }
+
+        .summary-box {
+            padding: 32px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 8px;
+            background: rgba(34, 197, 94, 0.03);
+            margin-bottom: 64px;
+        }
+
+        .summary-box h3 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(134, 239, 172, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .summary-box p {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+        }
+
+        .warning-box {
+            padding: 32px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.03);
+            margin-bottom: 64px;
+        }
+
+        .warning-box h3 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(248, 113, 113, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .warning-box p, .warning-box li {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+        }
+
+        .warning-box ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .sources-list {
+            margin-top: 16px;
+        }
+
+        .sources-list li {
+            font-size: 13px;
+            color: rgb(136, 136, 136);
+            margin-bottom: 6px;
+            list-style: none;
+        }
+
+        .sources-list a {
+            color: rgba(147, 197, 253, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .sources-list a:hover { color: rgba(147, 197, 253, 1); }
+
+        .research-date {
+            font-size: 12px;
+            color: rgb(100, 100, 100);
+            margin-top: 32px;
+        }
+
+        footer {
+            padding: 48px;
+            background: rgb(22, 22, 22);
+            border-top: 1px solid rgba(64, 64, 64, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .footer-brand {
+            font-family: 'Cabin', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(136, 136, 136);
+            letter-spacing: 0.05em;
+        }
+
+        footer .footer-links { display: flex; gap: 24px; }
+
+        footer .footer-links a {
+            font-size: 13px;
+            color: rgb(136, 136, 136);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer .footer-links a:hover { color: #f7f7f7; }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgb(164, 164, 164);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 24px; }
+            .nav-brand span { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 22, 22, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 8px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(64, 64, 64, 0.2); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
+            .page-header { padding: 100px 24px 40px; }
+            .page-header h1 { font-size: 28px; }
+            .page-header p { font-size: 16px; }
+            .content-container { padding: 40px 24px 80px; }
+            .competitors-grid { grid-template-columns: 1fr; }
+            .claims-table { font-size: 13px; }
+            .claims-table th, .claims-table td { padding: 10px 8px; }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html#challenge">The Challenge</a></li>
+            <li><a href="platform.html">Platform</a></li>
+            <li><a href="architecture.html">Architecture</a></li>
+            <li><a href="regimes.html">Regimes</a></li>
+            <li><a href="market.html" class="active">Market</a></li>
+            <li><a href="https://graceblackwell.ai/" target="_blank">Grace Blackwell</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="section-label">Market Research</div>
+        <h1>Problem validation and competitive landscape.</h1>
+        <p>Independent verification of Axiom's problem statement against public sources, regulatory publications, and industry data. Every claim checked.</p>
+    </div>
+
+    <div class="content-container">
+
+        <div class="summary-box">
+            <h3>Overall Assessment</h3>
+            <p>The core problem is real and well-documented. Insurance regulatory reporting is manual, error-prone, and under increasing pressure from regulatory change (Solvency UK, EU Solvency II revision). The pain points around data aggregation, XBRL validation, and governance bottlenecks are genuine industry challenges. However, the market has established competitors and two specific claims in the current pitch materials require correction.</p>
+        </div>
+
+        <h2 class="section-title">Claim Verification</h2>
+        <p class="section-subtitle">Each claim from the Axiom pitch materials verified against public sources.</p>
+
+        <table class="claims-table">
+            <thead>
+                <tr>
+                    <th>Claim</th>
+                    <th>Verdict</th>
+                    <th>Evidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Solvency UK transition completed 31 December 2024</td>
+                    <td><span class="verdict verdict-verified">Verified</span></td>
+                    <td>PRA's PS2/24 and PS3/24 took effect 31 Dec 2024. Shift to principles-based internal model assessment, simplified TMTP, new systems and controls requirements. <br><a class="source-link" href="https://www.bankofengland.co.uk/news/2024/november/conclusion-of-the-solvency-ii-review" target="_blank">Bank of England &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>Lloyd's managing agents face 30+ regulatory deadlines per month</td>
+                    <td><span class="verdict verdict-unverified">Unverified</span></td>
+                    <td>Lloyd's Business Timetable confirms heavy filing burden (QF1, RRQ, QMA, catastrophe models, exposure management, Part VII, plus PRA/FCA filings). The volume is substantial but "30+" is not substantiated by any public source. Some months are heavier than others. <br><a class="source-link" href="https://www.lloyds.com/market-resources/business-timetable" target="_blank">Lloyd's Business Timetable &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>FCA fines £124M+ in 2025 — late and inaccurate returns a consistent trigger</td>
+                    <td><span class="verdict verdict-false">False</span></td>
+                    <td>The £124M total is real but covers ALL FCA enforcement across ALL sectors (mostly AML: Nationwide £44M, Barclays £42M). The insurance sector received zero FCA fines in 2025 and only £1.1M in 2024. Late regulatory returns are not a documented enforcement trigger for insurers. <br><a class="source-link" href="https://www.insuranceage.co.uk/insight/7957789/no-fca-insurance-sector-fines-in-2025" target="_blank">Insurance Age &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>EU Solvency II revised directive requires implementation by January 2027</td>
+                    <td><span class="verdict verdict-verified">Verified</span></td>
+                    <td>Directive (EU) 2025/2 adopted November 2024. Member states must transpose by 30 January 2027. Includes tougher spread-risk stress tests, revised risk margin methodology, climate/sustainability risk integration. <br><a class="source-link" href="https://www.amindis.com/knowledge/solvency-ii-directive" target="_blank">AMINDIS &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>Lloyd's requires MD5 checksums on syndicate submissions</td>
+                    <td><span class="verdict verdict-unverified">Unverified</span></td>
+                    <td>No public documentation confirms MD5 checksums specifically. Lloyd's uses SecureShare for submissions with file integrity measures, but the specific mechanism is not publicly documented. MD5 is cryptographically deprecated; SHA-256 would be more likely in current implementations.</td>
+                </tr>
+                <tr>
+                    <td>Lloyd's requires director sign-off on quarterly QF1 returns</td>
+                    <td><span class="verdict verdict-verified">Verified</span></td>
+                    <td>Lloyd's Business Timetable explicitly states QF1 requires "sign-off required by director on behalf of the board." This is a confirmed governance requirement for managing agents. <br><a class="source-link" href="https://www.lloyds.com/market-resources/business-timetable" target="_blank">Lloyd's Business Timetable &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>XBRL taxonomy required for PRA / Solvency UK submissions</td>
+                    <td><span class="verdict verdict-verified">Verified</span></td>
+                    <td>PRA requires XBRL-format submissions through BEEDS (Bank of England Electronic Data Submission). Insurance Taxonomy v2.1.0 published December 2025. PRA provides an XBRL Filing Manual and maintains a taxonomy known issues log. <br><a class="source-link" href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector" target="_blank">Bank of England &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>Manual data aggregation from source systems is error-prone and creates bottlenecks</td>
+                    <td><span class="verdict verdict-verified">Verified</span></td>
+                    <td>Well-documented industry pain point. Multiple vendors (Workiva, Fortimize) market specifically around this problem. Industry publications reference "spreadsheets, manual adjustments, and reporting built outside the system" as endemic. The PRA has acknowledged data quality issues through its taxonomy known issues log. <br><a class="source-link" href="https://www.workiva.com/solutions/insurance" target="_blank">Workiva &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td>Template version mismatches cause submission rejections</td>
+                    <td><span class="verdict verdict-partial">Partially verified</span></td>
+                    <td>The BEEDS portal validates submitted XBRL against the current taxonomy and rejects non-conforming files. PRA maintains a taxonomy known issues log. IBM has documented PRA BEEDS test submission errors. The mechanism is real; the specific framing is simplified but not inaccurate. <br><a class="source-link" href="https://www.ibm.com/support/pages/pra-beeds-test-submission-errors" target="_blank">IBM &rarr;</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <h3>Claims Requiring Correction</h3>
+            <ul>
+                <li><strong>FCA fines £124M+</strong> — This figure is real but covers all sectors and enforcement types. The insurance sector received zero FCA fines in 2025. This claim is materially misleading and should be corrected or removed.</li>
+                <li><strong>30+ deadlines per month</strong> — Directionally correct but the specific number is unsubstantiated. Consider softening to "dozens of regulatory deadlines" or substantiating with Lloyd's Business Timetable data.</li>
+                <li><strong>MD5 checksums</strong> — Cannot be verified from public sources. Either confirm from internal Lloyd's documentation or remove the specific claim.</li>
+            </ul>
+        </div>
+
+        <hr class="divider">
+
+        <h2 class="section-title">Competitive Landscape</h2>
+        <p class="section-subtitle">Established vendors in insurance regulatory reporting automation. This is not a greenfield market.</p>
+
+        <div class="competitors-grid">
+            <div class="competitor-card">
+                <div class="competitor-position">Market Leader</div>
+                <div class="competitor-name"><a href="https://www.regnology.net/en/solutions/for-the-regulated/regnology-insurance-hub/" target="_blank">Regnology</a></div>
+                <div class="competitor-desc">Insurance Hub covers Solvency II/UK across 29 countries. Deep XBRL expertise. Serves 1,800+ regulated entities. Acquired Invoke (regulatory reporting specialist). The incumbent to beat.</div>
+                <a class="competitor-link" href="https://www.regnology.net/en/solutions/for-the-regulated/regnology-insurance-hub/" target="_blank">regnology.net/insurance-hub &rarr;</a>
+            </div>
+            <div class="competitor-card">
+                <div class="competitor-position">Enterprise Analytics</div>
+                <div class="competitor-name"><a href="https://www.moodysanalytics.com/solutions-overview/insurance/insurance-regulatory-reporting" target="_blank">Moody's Analytics</a></div>
+                <div class="competitor-desc">RiskIntegrity suite for Solvency II reporting. Supports standard formula and internal models. Outputs to XLS, XBRL, TXT formats. Strong in actuarial integration.</div>
+                <a class="competitor-link" href="https://www.moodysanalytics.com/solutions-overview/insurance/insurance-regulatory-reporting" target="_blank">moodysanalytics.com/insurance &rarr;</a>
+            </div>
+            <div class="competitor-card">
+                <div class="competitor-position">Compliance Platform</div>
+                <div class="competitor-name"><a href="https://www.workiva.com/solutions/insurance" target="_blank">Workiva</a></div>
+                <div class="competitor-desc">Insurance compliance reporting across GAAP, RBC, ORSA, and Solvency II. Cross-entity consolidation. Strong in eliminating manual data entry across compliance, actuarial, and risk teams.</div>
+                <a class="competitor-link" href="https://www.workiva.com/solutions/insurance" target="_blank">workiva.com/insurance &rarr;</a>
+            </div>
+            <div class="competitor-card">
+                <div class="competitor-position">Solvency Specialist</div>
+                <div class="competitor-name"><a href="https://www.clever-soft.com/solution/solvency-ii/" target="_blank">Cleversoft</a></div>
+                <div class="competitor-desc">Solvency II and UK compliance specifically for insurers. XBRL generation and validation. Focused on the regulatory reporting workflow rather than broader enterprise analytics.</div>
+                <a class="competitor-link" href="https://www.clever-soft.com/solution/solvency-ii/" target="_blank">clever-soft.com/solvency-ii &rarr;</a>
+            </div>
+            <div class="competitor-card">
+                <div class="competitor-position">Risk & Analytics</div>
+                <div class="competitor-name"><a href="https://www.msci.com/our-solutions/climate-investing/climate-and-esg-regulatory-reporting" target="_blank">MSCI</a></div>
+                <div class="competitor-desc">Regulatory reporting solutions for insurers with strength in ESG and climate risk reporting. Broader risk analytics platform with regulatory compliance as one capability.</div>
+                <a class="competitor-link" href="https://www.msci.com/our-solutions/climate-investing/climate-and-esg-regulatory-reporting" target="_blank">msci.com/regulatory-reporting &rarr;</a>
+            </div>
+            <div class="competitor-card">
+                <div class="competitor-position">Ratings & Financial Data</div>
+                <div class="competitor-name"><a href="https://web.ambest.com/ratings-services/bests-financial-suite" target="_blank">AM Best</a></div>
+                <div class="competitor-desc">Best's Financial Suite for Solvency II. Primarily a ratings agency, but offers financial data and reporting tools that insurers use alongside their regulatory submissions.</div>
+                <a class="competitor-link" href="https://web.ambest.com/ratings-services/bests-financial-suite" target="_blank">ambest.com/financial-suite &rarr;</a>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <h2 class="section-title">Sources</h2>
+        <ul class="sources-list">
+            <li><a href="https://www.bankofengland.co.uk/news/2024/november/conclusion-of-the-solvency-ii-review" target="_blank">Bank of England — Conclusion of the Solvency II Review (Nov 2024)</a></li>
+            <li><a href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector" target="_blank">PRA — Regulatory Reporting Insurance Sector</a></li>
+            <li><a href="https://www.lloyds.com/market-resources/business-timetable" target="_blank">Lloyd's — Business Timetable</a></li>
+            <li><a href="https://www.fca.org.uk/news/news-stories/2025-fines" target="_blank">FCA — 2025 Fines</a></li>
+            <li><a href="https://www.insuranceage.co.uk/insight/7957789/no-fca-insurance-sector-fines-in-2025" target="_blank">Insurance Age — No FCA Insurance Sector Fines in 2025</a></li>
+            <li><a href="https://www.insuranceage.co.uk/insight/7955882/fca-insurance-related-fines-total-ps11m-in-2024" target="_blank">Insurance Age — FCA Insurance Related Fines Total £1.1m in 2024</a></li>
+            <li><a href="https://www.amindis.com/knowledge/solvency-ii-directive" target="_blank">AMINDIS — EU Solvency II Directive 2025/2 Updates</a></li>
+            <li><a href="https://www.skadden.com/insights/publications/2024/03/pra-announces-final-adjustments" target="_blank">Skadden — PRA Final Adjustments to Solvency UK</a></li>
+            <li><a href="https://www.pkf-l.com/insights/lloyds-syndicates-solvency-uk-reporting/" target="_blank">PKF Littlejohn — Lloyd's Syndicates Solvency UK Reporting</a></li>
+            <li><a href="https://www.ibm.com/support/pages/pra-beeds-test-submission-errors" target="_blank">IBM — PRA BEEDS Test Submission Errors</a></li>
+        </ul>
+
+        <p class="research-date">Research conducted March 2026. Sources may have been updated since verification.</p>
+
+    </div>
+
+    <footer>
+        <div class="footer-brand">AXIOM by Grace Blackwell</div>
+        <div class="footer-links">
+            <a href="index.html">Overview</a>
+            <a href="https://graceblackwell.ai/" target="_blank">graceblackwell.ai</a>
+        </div>
+    </footer>
+
+</body>
+</html>
