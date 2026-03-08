@@ -16,6 +16,7 @@ Marketing/pitch site for an AI-powered insurance regulatory returns platform. Br
 | `platform.html` | Platform capabilities — orchestration pipeline diagram, feature cards |
 | `architecture.html` | Technical architecture — stack, deployment, security |
 | `regimes.html` | Regulatory regime coverage — Solvency UK, Lloyd's, FCA, EIOPA |
+| `critique.html` | Critique — claim verification, competitive landscape, feasibility assessment |
 | `Axiom_Insurance_Sector_Brief.docx` | Sector brief document (sales collateral) |
 
 ## Tech

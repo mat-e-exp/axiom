@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axiom — Market Research</title>
+    <title>Axiom — Critique</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -323,6 +323,107 @@
             margin-top: 32px;
         }
 
+        .feasibility-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 48px;
+        }
+
+        .feasibility-table th {
+            font-family: 'Cabin', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+        }
+
+        .feasibility-table td {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(200, 200, 200);
+            padding: 16px;
+            border-bottom: 1px solid rgba(64, 64, 64, 0.2);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .feasibility-table tr:hover td {
+            background: rgba(59, 130, 246, 0.03);
+        }
+
+        .barrier-low {
+            color: rgba(134, 239, 172, 0.9);
+            font-family: 'Cabin', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .barrier-medium {
+            color: rgba(251, 191, 36, 0.9);
+            font-family: 'Cabin', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .barrier-high {
+            color: rgba(248, 113, 113, 0.9);
+            font-family: 'Cabin', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .next-steps-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 48px;
+        }
+
+        .next-steps-list li {
+            padding: 20px 24px;
+            border: 1px solid rgba(64, 64, 64, 0.3);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(200, 200, 200);
+            line-height: 1.7;
+        }
+
+        .next-steps-list li strong {
+            font-family: 'Cabin', sans-serif;
+            font-weight: 600;
+            color: #f7f7f7;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .amber-box {
+            padding: 32px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 8px;
+            background: rgba(245, 158, 11, 0.03);
+            margin-bottom: 64px;
+        }
+
+        .amber-box h3 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(251, 191, 36, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .amber-box p {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgb(164, 164, 164);
+            line-height: 1.7;
+        }
+
         footer {
             padding: 48px;
             background: rgb(22, 22, 22);
@@ -417,15 +518,15 @@
             <li><a href="platform.html">Platform</a></li>
             <li><a href="architecture.html">Architecture</a></li>
             <li><a href="regimes.html">Regimes</a></li>
-            <li><a href="market.html" class="active">Market</a></li>
+            <li><a href="critique.html" class="active">Critique</a></li>
             <li><a href="https://graceblackwell.ai/" target="_blank">Grace Blackwell</a></li>
         </ul>
     </nav>
 
     <div class="page-header">
-        <div class="section-label">Market Research</div>
-        <h1>Problem validation and competitive landscape.</h1>
-        <p>Independent verification of Axiom's problem statement against public sources, regulatory publications, and industry data. Every claim checked.</p>
+        <div class="section-label">Critique</div>
+        <h1>Honest assessment of claims, feasibility, and barriers.</h1>
+        <p>Independent verification of Axiom's problem statement, competitive landscape analysis, and a candid feasibility assessment. What's real, what's wrong, and what it would actually take to build this.</p>
     </div>
 
     <div class="content-container">
@@ -547,6 +648,122 @@
                 <a class="competitor-link" href="https://web.ambest.com/ratings-services/bests-financial-suite" target="_blank">ambest.com/financial-suite &rarr;</a>
             </div>
         </div>
+
+        <hr class="divider">
+
+        <h2 class="section-title">Feasibility Assessment</h2>
+        <p class="section-subtitle">Can Axiom actually be built? What's technically straightforward, and what's genuinely hard.</p>
+
+        <div class="amber-box">
+            <h3>Bottom Line</h3>
+            <p>The technology is buildable. The domain knowledge is the moat. The orchestration, workflow, and validation layers are standard software engineering. But the product's value lives in regulatory domain expertise — understanding what each return contains, how actuarial data feeds into Solvency calculations, and what regulators actually look for. This cannot be built without people who have done insurance regulatory reporting professionally.</p>
+        </div>
+
+        <h2 class="section-title" style="font-size: 18px;">What's Technically Straightforward</h2>
+        <p class="section-subtitle">Solved problems that any competent engineering team could build.</p>
+
+        <table class="feasibility-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Barrier</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Workflow orchestration and approval chains</td>
+                    <td><span class="barrier-low">Low</span></td>
+                    <td>Standard software. Data collection pipelines, role-based access, audit trails, deadline tracking, notifications. Well-understood patterns.</td>
+                </tr>
+                <tr>
+                    <td>Document versioning and history</td>
+                    <td><span class="barrier-low">Low</span></td>
+                    <td>Solved problem. Version control for returns, change attribution, rollback capability.</td>
+                </tr>
+                <tr>
+                    <td>User management and governance</td>
+                    <td><span class="barrier-low">Low</span></td>
+                    <td>Board sign-off gates, delegation rules, escalation logic, timestamped approvals.</td>
+                </tr>
+                <tr>
+                    <td>Deadline calendars and alerting</td>
+                    <td><span class="barrier-low">Low</span></td>
+                    <td>Calendar management with regulatory deadline tracking. The data (which returns, when) requires domain knowledge, but the system is simple.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" style="font-size: 18px;">What's Genuinely Hard</h2>
+        <p class="section-subtitle">Barriers that require specialist knowledge, industry relationships, or significant investment.</p>
+
+        <table class="feasibility-table">
+            <thead>
+                <tr>
+                    <th>Challenge</th>
+                    <th>Barrier</th>
+                    <th>Why It's Hard</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>XBRL taxonomy implementation</td>
+                    <td><span class="barrier-medium">Medium</span></td>
+                    <td>Open-source libraries exist (Arelle). PRA publishes taxonomies (v2.1.0). But mapping business data to taxonomy fields requires deep understanding of what each field means in an insurance context. The taxonomy changes regularly. Getting validation right means understanding the PRA's specific interpretation.</td>
+                </tr>
+                <tr>
+                    <td>Source system integration</td>
+                    <td><span class="barrier-high">High</span></td>
+                    <td>Every insurer uses different systems (Guidewire, Duck Creek, FIS, SAP, bespoke). There are no standard APIs across the industry. Each client integration is a custom project. This is why incumbents like Regnology have moats — they've built 1,800+ integrations over years.</td>
+                </tr>
+                <tr>
+                    <td>Regulatory domain knowledge</td>
+                    <td><span class="barrier-high">Very High</span></td>
+                    <td>This is the real barrier. You need people who know what each return actually contains, how actuarial reserves feed into Solvency UK calculations, what PRA supervisors look for, Lloyd's-specific requirements (QF1 structure, overseas trust fund rules), and how firms currently produce returns. This requires hiring from the insurance regulatory reporting industry.</td>
+                </tr>
+                <tr>
+                    <td>Regulator submission channels</td>
+                    <td><span class="barrier-medium">Unknown</span></td>
+                    <td>PRA uses BEEDS portal. Lloyd's uses SecureShare. FCA uses RegData. It is not confirmed whether these have APIs or require manual upload. Without API access, "automated submission" means "generate the file in the right format" — the human still uploads it. Still valuable, but not end-to-end.</td>
+                </tr>
+                <tr>
+                    <td>Market trust and credibility</td>
+                    <td><span class="barrier-high">Very High</span></td>
+                    <td>Insurance firms won't use a regulatory submission tool from an unknown vendor without proven accuracy (one wrong submission = regulatory action), liability clarity, security certifications (ISO 27001 minimum, likely SOC 2), and references from other regulated firms. Trust is earned over years, not months.</td>
+                </tr>
+                <tr>
+                    <td>AI value proposition</td>
+                    <td><span class="barrier-medium">Medium</span></td>
+                    <td>The pitch says "AI agents collect data" — but collecting data from known source systems is just ETL. Where would AI genuinely add value that deterministic code can't? Potentially: anomaly detection, consistency checking against prior returns, natural-language explanations of validation failures, or intelligent data mapping. The AI angle needs to be real, not marketing.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" style="font-size: 18px;">Before Building Anything</h2>
+        <p class="section-subtitle">Questions that must be answered first.</p>
+
+        <ul class="next-steps-list">
+            <li>
+                <strong>1. Talk to people who produce regulatory returns</strong>
+                Speak to 3-5 compliance or finance professionals at Lloyd's managing agents. Understand their actual workflow, pain points, and what tools they use today. The pitch assumes pain points — verify them with real users.
+            </li>
+            <li>
+                <strong>2. Investigate regulator submission portals</strong>
+                Check whether PRA BEEDS, Lloyd's SecureShare, and FCA RegData have APIs. If they're manual-upload-only, that changes the product scope significantly. End-to-end automation requires programmatic access.
+            </li>
+            <li>
+                <strong>3. Understand incumbent pricing and gaps</strong>
+                If Regnology costs £500K/year and has poor UX, there might be a niche for a modern platform. If they cost £50K and work fine, the gap may not exist. Understand what the competition charges and where they fall short.
+            </li>
+            <li>
+                <strong>4. Validate the AI differentiation</strong>
+                Determine where AI genuinely adds value over deterministic code. Data collection from known systems is ETL, not AI. Potential real AI value: anomaly detection, consistency analysis against prior returns, intelligent exception triage, natural-language regulatory change interpretation.
+            </li>
+            <li>
+                <strong>5. Assess the need for a domain expert</strong>
+                Based on the competitive landscape and barrier analysis, a regulatory reporting specialist co-founder or advisor is almost certainly required. The technology is the easy part; the domain knowledge is the product.
+            </li>
+        </ul>
 
         <hr class="divider">
 
