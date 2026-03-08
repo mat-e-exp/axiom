@@ -185,13 +185,128 @@
 
         footer .footer-links a:hover { color: #f7f7f7; }
 
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgb(164, 164, 164);
+        }
+
+        .mobile-platform-summary { display: none; }
+
         @media (max-width: 768px) {
             nav { padding: 0 24px; }
+            .nav-brand span { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 22, 22, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 8px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(64, 64, 64, 0.2); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
             .page-header { padding: 100px 24px 40px; }
             .page-header h1 { font-size: 28px; }
+            .page-header p { font-size: 16px; }
             .platform-diagram { padding: 20px 24px 40px; }
+            .platform-diagram svg { display: none; }
+            .mobile-platform-summary {
+                display: block;
+                width: 100%;
+            }
+            .mp-section {
+                padding: 16px;
+                border: 1px solid rgba(64, 64, 64, 0.35);
+                border-radius: 8px;
+                background: rgba(22, 22, 22, 0.4);
+            }
+            .mp-core {
+                padding: 20px 16px;
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-radius: 8px;
+                background: rgba(59, 130, 246, 0.03);
+            }
+            .mp-label {
+                font-size: 10px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgb(136, 136, 136);
+                margin-bottom: 6px;
+            }
+            .mp-items {
+                font-size: 13px;
+                color: rgb(164, 164, 164);
+            }
+            .mp-arrow {
+                text-align: center;
+                color: rgb(64, 64, 64);
+                font-size: 20px;
+                margin: 8px 0;
+            }
+            .mp-stages {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-top: 12px;
+            }
+            .mp-stage {
+                padding: 14px;
+                border: 1px solid;
+                border-radius: 6px;
+                font-family: 'Cabin', sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                color: #f7f7f7;
+                background: rgba(22, 22, 22, 0.6);
+            }
+            .mp-stage span {
+                display: block;
+                font-size: 11px;
+                font-weight: 300;
+                color: rgb(136, 136, 136);
+                margin-top: 4px;
+                font-family: 'Lato', sans-serif;
+            }
+            .mp-governed {
+                display: inline-block;
+                font-size: 9px;
+                letter-spacing: 0.1em;
+                color: rgba(251, 191, 36, 0.8);
+                border: 1px solid rgba(245, 158, 11, 0.3);
+                border-radius: 10px;
+                padding: 3px 10px;
+                margin-top: 10px;
+                background: rgba(245, 158, 11, 0.08);
+            }
             .capabilities-container { padding: 40px 24px 80px; }
             .capabilities-grid { grid-template-columns: 1fr; }
+            .capability-card { padding: 24px; }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 32px 24px;
+            }
         }
     </style>
 </head>
@@ -199,6 +314,9 @@
 
     <nav>
         <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="index.html#challenge">The Challenge</a></li>
             <li><a href="platform.html" class="active">Platform</a></li>
@@ -412,6 +530,29 @@
             <rect x="710" y="387" width="30" height="14" rx="7" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.2)" stroke-width="0.6"/>
             <text x="748" y="397" fill="rgba(164,164,164,0.6)" font-size="8" font-family="Lato">Audit</text>
         </svg>
+
+        <div class="mobile-platform-summary">
+            <div class="mp-section">
+                <div class="mp-label">Source Systems</div>
+                <div class="mp-items">Finance ERP / Actuarial / Underwriting / Reinsurance</div>
+            </div>
+            <div class="mp-arrow">&#x2193;</div>
+            <div class="mp-core">
+                <div class="mp-label">Axiom Orchestration Platform</div>
+                <div class="mp-stages">
+                    <div class="mp-stage" style="border-color: rgba(59,130,246,0.4);">Collect<span>Source data reconciliation</span></div>
+                    <div class="mp-stage" style="border-color: rgba(139,92,246,0.4);">Validate<span>Schema &amp; rules check</span></div>
+                    <div class="mp-stage" style="border-color: rgba(245,158,11,0.4);">Approve<span>Human sign-off gate</span></div>
+                    <div class="mp-stage" style="border-color: rgba(34,197,94,0.4);">Submit<span>Regulatory filing</span></div>
+                </div>
+                <div class="mp-governed">GOVERNED &middot; FULL AUDIT TRAIL</div>
+            </div>
+            <div class="mp-arrow">&#x2193;</div>
+            <div class="mp-section">
+                <div class="mp-label">Regulators</div>
+                <div class="mp-items">PRA / Lloyd's / FCA / EIOPA</div>
+            </div>
+        </div>
     </div>
 
     <div class="capabilities-container">

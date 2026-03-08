@@ -604,18 +604,142 @@
             100% { left: calc(100% - 30px); }
         }
 
+        /* Hamburger nav */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgb(164, 164, 164);
+        }
+
+        .mobile-before-summary { display: none; }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav { padding: 0 24px; }
+            .nav-brand span { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 22, 22, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 8px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(64, 64, 64, 0.2); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
             .hero { padding: 100px 24px 60px; }
-            .hero h1 { font-size: 36px; }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .hero-tags { gap: 8px; }
+            .hero-tag { font-size: 11px; padding: 6px 12px; }
             section { padding: 80px 24px; }
-            .section-title { font-size: 28px; }
+            .section-title { font-size: 26px; }
+            .section-subtitle { font-size: 16px; margin-bottom: 32px; }
             .causes-grid { grid-template-columns: 1fr; }
-            .capabilities-grid { grid-template-columns: 1fr; }
-            .regime-grid { grid-template-columns: 1fr; }
-            .visual-scene { height: 400px; }
-            .flow-stages { flex-wrap: wrap; gap: 16px; justify-content: center; }
+            .cause-card { padding: 24px; }
+            .quote-section { padding: 48px 24px; }
+            .quote-text { font-size: 18px; }
+            .toggle-btn { padding: 12px 20px; font-size: 13px; }
+            .visual-scene { height: auto; min-height: 300px; }
+            .scene-before svg { display: none; }
+            .mobile-before-summary {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 8px 0;
+            }
+            .mobile-failure {
+                padding: 14px 16px;
+                background: rgba(239, 68, 68, 0.06);
+                border: 1px solid rgba(239, 68, 68, 0.2);
+                border-radius: 6px;
+            }
+            .mobile-failure strong {
+                font-size: 13px;
+                color: rgba(239, 68, 68, 0.85);
+            }
+            .mobile-failure p {
+                font-size: 12px;
+                color: rgb(136, 136, 136);
+                margin-top: 4px;
+            }
+            .mobile-deadline {
+                text-align: center;
+                padding: 12px;
+                background: rgba(239, 68, 68, 0.06);
+                border: 1px solid rgba(239, 68, 68, 0.2);
+                border-radius: 4px;
+                color: rgba(239, 68, 68, 0.8);
+                font-size: 11px;
+                font-weight: 700;
+                font-family: 'Cabin', sans-serif;
+                letter-spacing: 1px;
+            }
+            .scene-before, .scene-after {
+                position: relative;
+            }
+            .scene-before.hidden, .scene-after.hidden {
+                display: none;
+            }
+            .flow-connector { display: none; }
+            .flow-stages {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                margin-top: 24px;
+                padding: 0;
+            }
+            .flow-stage { width: 100%; max-width: 280px; }
+            .axiom-layer {
+                position: static;
+                transform: none;
+                width: 100%;
+            }
+            .source-systems {
+                position: static;
+                transform: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 24px;
+            }
+            .source-arrow {
+                position: static;
+                transform: none;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .regulator-targets {
+                position: static;
+                transform: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 12px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 32px 24px;
+            }
         }
     </style>
 </head>
@@ -623,6 +747,9 @@
 
     <nav>
         <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="#challenge" class="active">The Challenge</a></li>
             <li><a href="platform.html">Platform</a></li>
@@ -771,6 +898,30 @@
                         </text>
 
                     </svg>
+
+                    <div class="mobile-before-summary">
+                        <div class="mobile-failure">
+                            <strong>Data doesn't reconcile</strong>
+                            <p>Manual aggregation from 4+ source systems, no single source of truth</p>
+                        </div>
+                        <div class="mobile-failure">
+                            <strong>Wrong taxonomy version</strong>
+                            <p>Template v3.1 used instead of v3.2. MD5 checksum mismatch on submission</p>
+                        </div>
+                        <div class="mobile-failure">
+                            <strong>Signatory on leave</strong>
+                            <p>No delegation protocol, no audit trail for approval authority</p>
+                        </div>
+                        <div class="mobile-failure">
+                            <strong>XBRL validation failed</strong>
+                            <p>Submission rejected by PRA portal. Manual rework cycle begins</p>
+                        </div>
+                        <div class="mobile-failure">
+                            <strong>Version control breakdown</strong>
+                            <p>3 versions of Q4 figures circulating via email. No authoritative source</p>
+                        </div>
+                        <div class="mobile-deadline">DEADLINE: QF1 DUE IN 2 DAYS &middot; XBRL RESUBMISSION REQUIRED</div>
+                    </div>
                 </div>
 
                 <!-- AFTER: Governed flow -->

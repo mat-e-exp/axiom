@@ -229,12 +229,165 @@
             color: rgb(164, 164, 164);
             line-height: 1.7;
         }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgb(164, 164, 164);
+        }
+
+        .mobile-arch-summary, .mobile-mcp-summary { display: none; }
+
+        .arch-layer {
+            padding: 16px;
+            border: 1px solid;
+            border-radius: 8px;
+            background: rgba(22, 22, 22, 0.4);
+        }
+
+        .arch-layer-label {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgb(136, 136, 136);
+            margin-bottom: 4px;
+        }
+
+        .arch-layer-desc {
+            font-size: 13px;
+            color: rgb(164, 164, 164);
+        }
+
+        .arch-agents {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .arch-agents span {
+            font-size: 11px;
+            padding: 4px 10px;
+            border: 1px solid rgba(64, 64, 64, 0.4);
+            border-radius: 4px;
+            color: rgb(164, 164, 164);
+            background: rgba(22, 22, 22, 0.6);
+        }
+
+        .arch-arrow {
+            text-align: center;
+            color: rgb(64, 64, 64);
+            font-size: 18px;
+            margin: 6px 0;
+        }
+
+        .mcp-mobile-row {
+            padding: 14px;
+            border: 1px solid rgba(64, 64, 64, 0.3);
+            border-radius: 6px;
+            background: rgba(22, 22, 22, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .mcp-mobile-row .mcp-m-source {
+            font-family: 'Cabin', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgb(164, 164, 164);
+            margin-bottom: 2px;
+        }
+
+        .mcp-mobile-row .mcp-m-method {
+            font-size: 10px;
+            color: rgba(245, 158, 11, 0.6);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .mcp-mobile-row .mcp-m-adapter {
+            font-size: 12px;
+            color: rgba(110, 231, 183, 0.8);
+            padding: 6px 10px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.04);
+            margin-bottom: 6px;
+        }
+
+        .mcp-mobile-row .mcp-m-call {
+            font-size: 11px;
+            font-family: monospace;
+            color: rgba(196, 181, 253, 0.8);
+            padding: 6px 10px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 4px;
+            background: rgba(139, 92, 246, 0.04);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 24px; }
+            .nav-brand span { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 22, 22, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 8px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(64, 64, 64, 0.2); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
+            .page-header { padding: 100px 24px 40px; }
+            .page-header h1 { font-size: 28px; }
+            .page-header p { font-size: 16px; }
+            .architecture-container { padding: 20px 24px 60px; }
+            .architecture-container svg { display: none; }
+            .mobile-arch-summary { display: block; width: 100%; }
+            .mcp-section { padding: 48px 24px; }
+            .mcp-section h2 { font-size: 24px; }
+            .mcp-section .lead { font-size: 16px; margin-bottom: 32px; }
+            .mcp-diagram-container svg { display: none; }
+            .mobile-mcp-summary { display: block; width: 100%; }
+            .governance-section { padding: 48px 24px; }
+            .governance-section h2 { font-size: 24px; }
+            .governance-section .lead { font-size: 16px; }
+            .principles-grid { grid-template-columns: 1fr; }
+            .principle-card { padding: 20px; }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 32px 24px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="index.html#challenge">The Challenge</a></li>
             <li><a href="platform.html">Platform</a></li>
@@ -535,6 +688,75 @@
             <text x="887" y="993" fill="rgba(164,164,164,0.7)" font-size="9" font-family="Lato">Audit capture</text>
 
         </svg>
+
+        <div class="mobile-arch-summary">
+            <div class="arch-layer" style="border-color: rgba(64,64,64,0.4);">
+                <div class="arch-layer-label">Presentation Layer</div>
+                <div class="arch-layer-desc">Web UI — Dashboards, Approvals, Audit Viewer, Status</div>
+            </div>
+            <div class="arch-arrow">&#x2193;</div>
+            <div class="arch-layer" style="border-color: rgba(59,130,246,0.3);">
+                <div class="arch-layer-label" style="color: rgba(147,197,253,0.9);">Application Layer</div>
+                <div class="arch-layer-desc">FastAPI Backend — Auth, Workflow, Audit Log, Scheduler</div>
+                <div class="arch-agents">
+                    <span>Authentication</span>
+                    <span>Workflow State</span>
+                    <span>Approval Gates</span>
+                    <span>Audit Logger</span>
+                    <span>Scheduler</span>
+                </div>
+            </div>
+            <div class="arch-arrow">&#x2193;</div>
+            <div class="arch-layer" style="border-color: rgba(139,92,246,0.3);">
+                <div class="arch-layer-label" style="color: rgba(196,181,253,0.9);">Intelligence Layer — AI Agent Orchestrator</div>
+                <div class="arch-agents">
+                    <span style="border-color: rgba(59,130,246,0.3);">Data Collector</span>
+                    <span style="border-color: rgba(245,158,11,0.3);">Validator</span>
+                    <span style="border-color: rgba(16,185,129,0.3);">Return Preparer</span>
+                    <span style="border-color: rgba(239,68,68,0.3);">Compliance Check</span>
+                    <span style="border-color: rgba(34,197,94,0.3);">Submitter</span>
+                </div>
+                <div style="margin-top: 8px;">
+                    <span style="font-size: 9px; color: rgba(251,191,36,0.7); border: 1px solid rgba(245,158,11,0.3); padding: 2px 8px; border-radius: 3px; background: rgba(245,158,11,0.08);">HITL gates before Compliance &amp; Submit</span>
+                </div>
+            </div>
+            <div class="arch-arrow">&#x2193;</div>
+            <div class="arch-layer" style="border-color: rgba(16,185,129,0.3);">
+                <div class="arch-layer-label" style="color: rgba(110,231,183,0.9);">Tool Layer — MCP &amp; Deterministic Validation</div>
+                <div class="arch-agents">
+                    <span>Source Connectors</span>
+                    <span>XBRL Library</span>
+                    <span>MD5 / Hash</span>
+                    <span>Template Engine</span>
+                    <span>Policy Engine</span>
+                    <span>Portal Submission</span>
+                </div>
+            </div>
+            <div class="arch-arrow">&#x2193;</div>
+            <div class="arch-layer" style="border-color: rgba(245,158,11,0.3);">
+                <div class="arch-layer-label" style="color: rgba(251,191,36,0.8);">Persistence &amp; Enterprise Memory</div>
+                <div class="arch-agents">
+                    <span>Audit Trail</span>
+                    <span>Workflow State</span>
+                    <span>Return Archive</span>
+                    <span>Policy Rules</span>
+                    <span>Prior Returns</span>
+                    <span>Methodology Log</span>
+                    <span>Assumption Sets</span>
+                </div>
+            </div>
+            <div class="arch-arrow">&#x2193;</div>
+            <div style="display: flex; gap: 10px;">
+                <div class="arch-layer" style="border-color: rgba(64,64,64,0.4); flex: 1;">
+                    <div class="arch-layer-label">Source Systems</div>
+                    <div class="arch-layer-desc" style="font-size: 12px;">Finance / Actuarial / Underwriting / Reinsurance</div>
+                </div>
+                <div class="arch-layer" style="border-color: rgba(34,197,94,0.3); flex: 1;">
+                    <div class="arch-layer-label" style="color: rgba(134,239,172,0.8);">Regulators</div>
+                    <div class="arch-layer-desc" style="font-size: 12px;">PRA / Lloyd's / FCA / EIOPA</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mcp-section">
@@ -686,6 +908,39 @@
                 <rect x="730" y="478" width="220" height="28" rx="4" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.2)" stroke-width="0.8"/>
                 <text x="840" y="496" text-anchor="middle" fill="rgba(248,113,113,0.7)" font-size="8" font-family="Lato" letter-spacing="0.5">Missing / malformed data = structured error</text>
             </svg>
+
+            <div class="mobile-mcp-summary">
+                <div class="mcp-mobile-row">
+                    <div class="mcp-m-source">Actuarial Models (ResQ, Igloo, Tyche)</div>
+                    <div class="mcp-m-method">Scheduled CSV/Excel exports &rarr; File Watch</div>
+                    <div class="mcp-m-adapter">MCP: Actuarial Connector</div>
+                    <div class="mcp-m-call">get_technical_provisions(q="Q4")</div>
+                </div>
+                <div class="mcp-mobile-row">
+                    <div class="mcp-m-source">Finance / ERP (SAP, Oracle, Sage)</div>
+                    <div class="mcp-m-method">Legacy database &rarr; ODBC / SQL</div>
+                    <div class="mcp-m-adapter">MCP: Finance Connector</div>
+                    <div class="mcp-m-call">get_trial_balance(period="2025")</div>
+                </div>
+                <div class="mcp-mobile-row">
+                    <div class="mcp-m-source">Underwriting Platform</div>
+                    <div class="mcp-m-method">Proprietary systems &rarr; SFTP Poll</div>
+                    <div class="mcp-m-adapter">MCP: Underwriting Connector</div>
+                    <div class="mcp-m-call">get_premium_bordereaux(syndicate=1234)</div>
+                </div>
+                <div class="mcp-mobile-row">
+                    <div class="mcp-m-source">Reinsurance (Bordereaux, Treaties)</div>
+                    <div class="mcp-m-method">Email / SharePoint drops &rarr; Inbox / SDK</div>
+                    <div class="mcp-m-adapter">MCP: Reinsurance Connector</div>
+                    <div class="mcp-m-call">get_treaty_cashflows(year=2025)</div>
+                </div>
+                <div class="mcp-mobile-row">
+                    <div class="mcp-m-source">Manual Processes (Excel, Adjustments)</div>
+                    <div class="mcp-m-method">Watch folder &rarr; File Upload</div>
+                    <div class="mcp-m-adapter">MCP: File Ingestion</div>
+                    <div class="mcp-m-call">get_manual_adjustments(type="Q4")</div>
+                </div>
+            </div>
         </div>
     </div>
 

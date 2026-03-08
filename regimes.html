@@ -153,12 +153,56 @@
 
         footer .footer-links a:hover { color: #f7f7f7; }
 
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgb(164, 164, 164);
+        }
+
         @media (max-width: 768px) {
             nav { padding: 0 24px; }
+            .nav-brand span { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 22, 22, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 8px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(64, 64, 64, 0.2); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links a { display: block; padding: 14px 0; font-size: 14px; }
             .page-header { padding: 100px 24px 40px; }
             .page-header h1 { font-size: 28px; }
+            .page-header p { font-size: 16px; }
             .regimes-container { padding: 40px 24px 80px; }
             .regime-grid { grid-template-columns: 1fr; }
+            .regime-card { padding: 24px; }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 32px 24px;
+            }
         }
     </style>
 </head>
@@ -166,6 +210,9 @@
 
     <nav>
         <a href="index.html" class="nav-brand">AXIOM <span>by Grace Blackwell</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="index.html#challenge">The Challenge</a></li>
             <li><a href="platform.html">Platform</a></li>
